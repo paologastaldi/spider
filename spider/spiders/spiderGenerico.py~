@@ -1,0 +1,32 @@
+import scrapy
+from scrapy.selector import Selector
+
+from spider.items import ElementoDaEsaminare
+from gestioneDatabase import GestoreDatabase
+
+class Spider(scrapy.Spider):
+    name = "SpiderGenerico"
+    allowed_domains = []
+    start_urls = []
+    gestoreDatabase = ""
+    
+    def __init__(self, allowed_domains, start_urls):
+    	self.name = name
+    	self.allowed_domains = allowed_domains
+    	self.start_urls = start_urls
+    	
+    	self.gestoreDatabase = gestoreDatabase() #vedi altra feature
+
+    def parse(self, response):
+    	analizzatorePagina = Selector(response)
+    	elencoPagineSito = analizzatorePagina.xpath('//body')
+    	elencoElementiDaEsaminare = []
+    	
+    	for paginaSito in elencoPagineSito:
+    		elementoDaEsaminare = ElementoDaEsaminare()
+    		pagineSito = site.xpath('text()').extract()
+    		elencoElementiDaEsaminare.append(elementoDaEsaminare)
+    	
+    	return elencoElementiDaEsaminare
+    	
+    	

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+	
+	<!-- Immagini -->
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+	
+    <title>Narrow Jumbotron Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="jumbotron-narrow.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="index.php">Ricerca</a></li>
+            <li role="presentation"><a href="classifica.php">Classifica</a></li>
+          </ul>
+        </nav>
+        <h1 class="text-muted">Progetto: Spider</h1>
+        <h4 class="text-muted">Ricerca</h4>
+      </div>
+
+        <div class="jumbotron">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Cognome Professore</th>
+						<th>Conteggio Professore</th>
+						<th>Aggiungi alla ricerca</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+						$user="root";
+						$pwd="";
+						try{
+							$conn = new PDO("mysql:host=localhost;dbname=dbspider",$user,$pwd);
+							$conn -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+						}catch(PDOException $ex){
+							die("Error: " . $ex -> getMessage());
+						}
+						try{
+							$stmsql = $conn -> prepare("SELECT cognome, contatore,idProf FROM professori");
+							$result = $stmsql -> execute();
+						}catch(PDOException $ex){
+							die("Error query: " . $ex -> getMessage());
+						}
+						for($j=0; $row=$stmsql->fetch(); $j++){
+							$nome[$j] = $row[0];
+							$contatore[$j] = $row[1];
+							$id[$j]=$row[2];
+						}
+						for($i=0; $i<$j; $i++){
+							if($i == 0){
+								echo '<tr class="warning">';
+								echo '<form action="avviaSpider.php" method="GET">';
+							}else{
+								echo '<tr>';
+							}
+							echo '<td>' . $nome[$i] . '</td>';
+							echo '<td>' . $contatore[$i] . '</td>';
+							
+								echo '<td><input type="checkbox" name="elencoProfSelezionati[]" value="' . $id[$i] . '"></td>';
+							//echo '<td><a href="spider.php"><i class="fa fa-plus-square" style="font-size:24px"></a></i></td>';  
+							echo '</tr>';
+						}						
+					?>
+				</tbody>	
+			</table>
+			<p><input class="btn btn-lg btn-success" type="submit" name='avviaRicerca' value="Avvia ricerca"></p>
+			</form>
+		</div>
+		<footer class="footer">		
+			<p>Progetto spider di: Armitano Joshua, Ballario Marco, Garro Christian, Gastaldi Paolo, Giraudo Roberto, Mullace Matteo e Olivero Emanuele.</p>
+		</footer>
+	</div> <!-- /container -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
