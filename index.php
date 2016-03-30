@@ -91,7 +91,7 @@
 								echo '<td><input type="checkbox" name="elencoProfSelezionati[]" value="' . $id[$i] . '"></td>';
 							//echo '<td><a href="spider.php"><i class="fa fa-plus-square" style="font-size:24px"></a></i></td>';  
 							echo '</tr>';
-						}						
+						}					
 					?>
 				</tbody>	
 			</table>

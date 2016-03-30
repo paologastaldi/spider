@@ -8,8 +8,13 @@ class MySpider(Spider):
 	start_urls = []
 
 	def __init__(self, allowed_domain, start_url):
-		self.allowed_domains.append(allowed_domain)
-		self.start_urls.append(start_url)
+		#self.allowed_domains.append(allowed_domain)
+		#self.start_urls.append(start_url)
+		
+		self.allowed_domains = allowed_domain
+		self.start_urls = start_url
+		
+		print "Spider> analizzando " + allowed_domain + "..."
 
 	def parse(self, response):
 		analizzatorePagina = Selector(response)

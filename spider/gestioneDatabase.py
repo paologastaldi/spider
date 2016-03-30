@@ -124,28 +124,28 @@ class ManagerDB:
             #exit(7)  
             
     #Metodo che restituisce un url in ordine. Restituisce un None(Null) se non sono piu' presenti degli url.
-	def leggiurl(self):
-		urlist = [] #preparo la lista
-		try:
-			self.__cursor.execute('SELECT urlpartenza FROM indirizzi')
-			rows = self.__cursor.fetchall()
-			for row in rows:
-				urlist.append(row[0])
-			return urlist #restituisco una lista contenenti gli url	
-		except MySQLdb.Error, e:
-			print "Error %d: %s" % (e.args[0],e.args[1])
-			#exit(8) 
-		
-	#Metodo che restituisce un cognome in ordine. Restituisce un None(Null) se non sono piu' presenti degli url.
-	def leggicognome(self):
-		try:
-			if self.__cognomeindex == None: #Inizializzo il contatore degli url
-				self.__cognomeindex = 1
-			self.__cursor.execute('SELECT cognome FROM professori')
-			for item in range(self.__cognomeindex):
-				self.__tmp = self.__cursor.fetchone()	#scorro il cursore di tot
-			self.__urlindex = self.__urlindex+1
-			return self.__tmp
-		except MySQLdb.Error, e:
-			print "Error %d: %s" % (e.args[0],e.args[1])
-			#exit(9)
+    def leggiurl(self):
+        urlist = [] #preparo la lista
+        try:
+            self.__cursor.execute('SELECT urlpartenza FROM indirizzi')
+            rows = self.__cursor.fetchall()
+            for row in rows:
+                urlist.append(row[0])
+            return urlist #restituisco una lista contenenti gli url	
+        except MySQLdb.Error, e:
+            print "Error %d: %s" % (e.args[0],e.args[1])
+            #exit(8) 
+        
+    #Metodo che restituisce un cognome in ordine. Restituisce un None(Null) se non sono piu' presenti degli url.
+    def leggicognome(self):
+        try:
+            if self.__cognomeindex == None: #Inizializzo il contatore degli url
+                self.__cognomeindex = 1
+            self.__cursor.execute('SELECT cognome FROM professori')
+            for item in range(self.__cognomeindex):
+                self.__tmp = self.__cursor.fetchone()	#scorro il cursore di tot
+            self.__urlindex = self.__urlindex+1
+            return self.__tmp
+        except MySQLdb.Error, e:
+            print "Error %d: %s" % (e.args[0],e.args[1])
+            #exit(9)

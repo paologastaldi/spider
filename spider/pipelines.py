@@ -14,15 +14,16 @@ class SpiderPipeline(object):
 		elencoProfessori = gestoreDatabase.getElencoCognomi()
 		
 		for prof in elencoProfessori:
-			print prof
+			print "Spider> ricercando " + prof
 		
-		item['body'] = [element.lower() for element in item['body']] #tutti gli elementi in minuscolo
+		#item['body'] = [element.lower() for element in item['body']] #tutti gli elementi in minuscolo
 		corpoPagina = ''.join(item['body']) #dalla lista ottengo un array
+		corpoPagina.lower() #stringa tutta in minuscolo
 
 		for professore in elencoProfessori:
 			if corpoPagina.find(professore.lower()) >= 0 : #find() restituisce l'indice dell'occorrenza nella stringa):
 			
-				print "Trovato " + professore
+				print "Spider> trovato " + professore
 				gestoreDatabase.aggiungiCognome([professore]) #vedi altra feature
 		#raise DropItem("Elemento non piu' utile") #eliminazione dell'item (non obbligatoria) (lancia un'eccezione, pertanto non e' stata abilitata)
 		
