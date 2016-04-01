@@ -1,0 +1,10 @@
+# -*- coding: utf-8 -*-
+import os
+import sys
+
+#questo crea un processo zombie, ma almeno il processo chiamante (la pagina php) può andare avanti
+if os.fork() > 0:
+	print "Ricerca avviata"
+	sys.exit(0)
+else:
+	sys.exit(0)

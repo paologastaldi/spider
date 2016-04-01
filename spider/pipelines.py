@@ -11,6 +11,8 @@ class SpiderPipeline(object):
 		gestoreDatabase = ManagerDB() #vedi altra feature
 		gestoreDatabase.connetti()
 		
+		print "Spider> processando le pagine..."
+		
 		elencoProfessori = gestoreDatabase.getElencoCognomi()
 		
 		for prof in elencoProfessori:

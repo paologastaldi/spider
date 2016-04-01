@@ -51,8 +51,13 @@
 			echo 'Avviato spider: ' .$cmd .'<br>';
 			
 			echo shell_exec($programma);*/
+			echo 'test <br>';
+			echo 'path: ' .__DIR__  .'<br>';
+			$cmd = escapeshellcmd('python ' .__DIR__ .'/test.py');
+			echo "cmd: $cmd <br>";
+			echo shell_exec($cmd);
 			
-			$cmd = "";
+			/*$cmd = "";
 			
 			foreach($risultati as $sitoWeb){
 				$programma = escapeshellcmd('python ./test.py "scrapy crawl spiderRicerca -a allowed_domain=' .$sitoWeb['dominio']  .' -a start_url=' .$sitoWeb['urlPartenza'] .'"');
@@ -62,7 +67,7 @@
 				echo shell_exec($programma) .'<br>';
 				
 				//$cmd = $cmd ." && " .$programma;			
-			}
+			}*/
 				
 			//echo (exec($programma) != NULL ? "OK" : "Error") .'<br>';	
 			

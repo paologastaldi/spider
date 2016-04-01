@@ -124,13 +124,13 @@ class ManagerDB:
             #exit(7)  
             
     #Metodo che restituisce un url in ordine. Restituisce un None(Null) se non sono piu' presenti degli url.
-    def leggiurl(self):
+    def leggiUrl(self):
         urlist = [] #preparo la lista
         try:
-            self.__cursor.execute('SELECT urlpartenza FROM indirizzi')
+            self.__cursor.execute('SELECT dominio, urlPartenza FROM indirizzi')
             rows = self.__cursor.fetchall()
             for row in rows:
-                urlist.append(row[0])
+                urlist.append([row[0], row[1]]) #Paolo Gastaldi 01/04/2016
             return urlist #restituisco una lista contenenti gli url	
         except MySQLdb.Error, e:
             print "Error %d: %s" % (e.args[0],e.args[1])

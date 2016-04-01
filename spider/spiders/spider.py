@@ -1,6 +1,6 @@
 from scrapy.spiders import Spider
 from scrapy.selector import Selector
-from ..items import ElementoDaEsaminare
+from items import ElementoDaEsaminare
 
 class MySpider(Spider):
 	name = "spiderRicerca"
@@ -17,6 +17,8 @@ class MySpider(Spider):
 		analizzatorePagina = Selector(response)
 		paginaSito = ElementoDaEsaminare()
 		paginaSito['body'] = analizzatorePagina.xpath('//body//text()').extract() #estrae tutto il corpo della pagina
+		
+		print "Spider> pagine ricevute"
 		return paginaSito
     	
     	

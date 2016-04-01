@@ -11,12 +11,13 @@ class SpiderPipeline(object):
 		gestoreDatabase = ManagerDB() #vedi altra feature
 		gestoreDatabase.connetti()
 		
+		print "Spider> processando le pagine..."
 		elencoProfessori = gestoreDatabase.getElencoCognomi()
 		
 		for prof in elencoProfessori:
 			print "Spider> ricercando " + prof
 		
-		item['body'] = [element.lower() for element in item['body']] #tutti gli elementi in minuscolo
+		#item['body'] = [element.lower() for element in item['body']] #tutti gli elementi in minuscolo
 		corpoPagina = ''.join(item['body']) #dalla lista ottengo un array
 		corpoPagina.lower() #stringa tutta in minuscolo
 

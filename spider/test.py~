@@ -1,0 +1,82 @@
+"""# scrapy api
+from spider.spiders.spider import MySpider
+
+# scrapy api
+from scrapy import signals#, log
+from twisted.internet import reactor
+from scrapy.crawler import Crawler
+from scrapy.settings import Settings
+from scrapy.utils.project import get_project_settings
+
+def spider_closing(spider):
+    #Activates on spider closed signal
+    #log.msg("Closing reactor", level=log.INFO)
+    reactor.stop()
+
+#log.start(loglevel=log.DEBUG)
+settings = Settings()
+
+# crawl responsibly
+settings.set("USER_AGENT", "Kiran Koduru (+http://kirankoduru.github.io)")
+mySpider = MySpider("asd", "asd")
+crawler = Crawler(mySpider, settings)
+
+# stop reactor when spider closes
+crawler.signals.connect(spider_closing, signal=signals.spider_closed)
+
+#crawler.configure()
+crawler.crawl(MySpider("google.it", "www.google.it"))
+crawler.start()
+reactor.run()
+
+-------------------------------------------------------------------"""
+
+import os
+
+# elementi del nostro spider
+from spider.spiders import spider
+from spider.spiders.spider import MySpider
+from spider.gestioneDatabase import ManagerDB
+
+# scrapy api
+from scrapy import signals
+from scrapy.crawler import Crawler
+from scrapy.settings import Settings
+from scrapy.utils.project import get_project_settings
+
+#creazione del gestore del database
+managerDB = ManagerDB()
+managerDB.connetti()
+
+#lista dei siti su cui avviare gli spider
+websites = managerDB.leggiUrl()
+
+# crawlers in esecuzione
+crawlers = []
+crawlersCompletati = 0;
+
+#funzione per gestire l'evento sulla chiusura dello spider
+def spider_closing(spider):
+    crawlersCompletati = crawlersCompletati+1
+    
+    #se hanno completato tutti i gli esecutori degli spider chiudo il programma
+    if crawlersCompletati == len(websites):
+    	print "finito" #exit(0)
+
+#per ogni sito lancio uno spider tramite un suo esecutore
+for i in range(len(websites)):	
+	# crawl responsibly
+	#settings.set("USER_AGENT", "Kiran Koduru (+http://kirankoduru.github.io)")
+
+	setting = get_project_settings()
+	
+	#creo un nuovo esecutore di uno spider	
+	crawler = Crawler(MySpider, setting)
+	
+	crawlers.append(crawler)
+	
+	#aggiungo all'esecutore dello spider una funzione sull'evento di chiusura dello spider
+	crawler.signals.connect(spider_closing, signal=signals.spider_closed)
+	
+	#avvio dello spider passando gli appositi parametri
+	crawler.crawl(websites[i][0], websites[i][1])
