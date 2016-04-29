@@ -24,56 +24,10 @@
 				$stmt->execute();
 			}
 			
-			/*$stmt->closeCursor();
-			$stmt = $dbh->prepare('SELECT dominio, urlPartenza FROM indirizzi');
-			$stmt->execute();
-			$risultati = $stmt->fetchAll();*/
-			
-			echo '<h3>Sto avviando gli spider...</h3>';
-			
-			/*$stmt->closeCursor();
-			$stmt = $dbh->prepare('SELECT * FROM indirizzi'); //stmt = statement
-			$stmt->execute();
-			$risultati = $stmt->fetchAll();*/
-			
-			/*avvio degli spider*/
-			/*$cmd = 'scrapy crawl spiderRicerca -a allowed_domain=[';
-			foreach($risultati as $sitoWeb){
-				$cmd = $cmd .'"' .$sitoWeb['dominio'] .'"' .',';
-			}
-			$cmd = $cmd .'] -a start_url=[';
-			foreach($risultati as $sitoWeb){
-				$cmd = $cmd .'"' .$sitoWeb['urlPartenza'] .'"' .',';
-			}
-			$cmd = $cmd .']';
-			
-			$programma = escapeshellcmd($cmd);
-			echo 'Avviato spider: ' .$cmd .'<br>';
-			
-			echo shell_exec($programma);*/
-			echo 'test <br>';
-			echo 'path: ' .__DIR__  .'<br>';
 			$cmd = escapeshellcmd('python ' .__DIR__ .'/test.py');
 			echo "cmd: $cmd <br>";
 			echo shell_exec($cmd);
 			
-			/*$cmd = "";
-			
-			foreach($risultati as $sitoWeb){
-				$programma = escapeshellcmd('python ./test.py "scrapy crawl spiderRicerca -a allowed_domain=' .$sitoWeb['dominio']  .' -a start_url=' .$sitoWeb['urlPartenza'] .'"');
-				
-			
-				echo 'Avviato spider: ' .$programma .'<br>';
-				echo shell_exec($programma) .'<br>';
-				
-				//$cmd = $cmd ." && " .$programma;			
-			}*/
-				
-			//echo (exec($programma) != NULL ? "OK" : "Error") .'<br>';	
-			
-			//shell_exec('scrapy crawl spiderRicerca -a allowed_domain=itiscuneo.gov.it -a start_url=http://www.itiscuneo.gov.it/');
-			
-			$stmt->closeCursor();
 			/*disconnessione*/
 			$dbh = null;
 			
