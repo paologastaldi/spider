@@ -21,10 +21,6 @@ try:
 	from scrapy.utils.project import get_project_settings
 	bloccaProcesso = reactor
 
-	with open("log.txt", "a") as myfile:
-		myfile.write("ok1")
-		myfile.close()
-
 	#creazione del gestore del database
 	managerDB = ManagerDB()
 	managerDB.connetti()
@@ -36,11 +32,6 @@ try:
 	crawlers = []
 	crawlersCompletati = 0;
 
-
-	with open("log.txt", "a") as myfile:
-		myfile.write("ok2")
-		myfile.close()
-
 	#funzione per gestire l'evento sulla chiusura dello spider
 	def spider_closing(spider):
 		crawlersCompletati = crawlersCompletati+1
@@ -48,12 +39,6 @@ try:
 		#se hanno completato tutti i gli esecutori degli spider chiudo il programma
 		if crawlersCompletati == len(websites):
 			print "finito"
-			
-			
-			with open("log.txt", "a") as myfile:
-				myfile.write("ok4")
-				myfile.close()
-		
 			bloccaProcesso.stop()
 
 	#per ogni sito lancio uno spider tramite un suo esecutore
@@ -75,11 +60,6 @@ try:
 	
 		#avvio dello spider passando gli appositi parametri
 		crawler.crawl(websites[i][0], websites[i][1])
-	
-	
-		with open("log.txt", "a") as myfile:
-			myfile.write("ok3")
-			myfile.close()
 	
 	#per bloccare il processo, altrimenti terminerebbe prima dei crawler
 	bloccaProcesso.run()
