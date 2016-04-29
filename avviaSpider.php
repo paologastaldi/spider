@@ -24,17 +24,17 @@
 				$stmt->execute();
 			}
 			
-			$stmt->closeCursor();
+			/*$stmt->closeCursor();
 			$stmt = $dbh->prepare('SELECT dominio, urlPartenza FROM indirizzi');
 			$stmt->execute();
-			$risultati = $stmt->fetchAll();
+			$risultati = $stmt->fetchAll();*/
 			
 			echo '<h3>Sto avviando gli spider...</h3>';
 			
-			$stmt->closeCursor();
-			$stmt = $dbh->prepare('SELECT * FROM indirizzi'); /*stmt = statement*/	
+			/*$stmt->closeCursor();
+			$stmt = $dbh->prepare('SELECT * FROM indirizzi'); //stmt = statement
 			$stmt->execute();
-			$risultati = $stmt->fetchAll();
+			$risultati = $stmt->fetchAll();*/
 			
 			/*avvio degli spider*/
 			/*$cmd = 'scrapy crawl spiderRicerca -a allowed_domain=[';
