@@ -32,8 +32,8 @@
 			$dbh = null;
 			
 			/*redirecting alla pagina dei risultati*/
-			/*header("Location: classifica.php");
-			die();*/
+			header("Location: classifica.php");
+			die();
 		}
 		catch(Exception $e)
 		{
