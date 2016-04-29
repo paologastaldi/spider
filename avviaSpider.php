@@ -24,7 +24,7 @@
 				$stmt->execute();
 			}
 			
-			$cmd = escapeshellcmd('python ' .__DIR__ .'/test.py');
+			$cmd = escapeshellcmd('python ' .__DIR__ .'/gestoreSpider.py');
 			echo "cmd: $cmd <br>";
 			echo shell_exec($cmd);
 			
