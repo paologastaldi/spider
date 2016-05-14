@@ -37,12 +37,13 @@
       <div class="header clearfix">
         <nav>
           <ul class="nav nav-pills pull-right">
-            <li role="presentation"><a href="index.php">Ricerca</a></li>
-            <li role="presentation"><a href="classifica.php">Classifica</a></li>
+				<li role="presentation"><a href="index.php">Ricerca</a></li>
+				<li role="presentation"><a href="classifica.php">Classifica</a></li>
+				<li role="presentation"><a href="link.php">Link</a></li>
           </ul>
         </nav>
         <h1 class="text-muted">Progetto: Spider</h1>
-        <h4 class="text-muted">Classifica</h4>
+        <h4 class="text-muted">Link</h4>
       </div>
 	  
 	
